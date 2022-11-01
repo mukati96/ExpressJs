@@ -3,7 +3,17 @@ var productModel = require("../model/Product.js");
 class productController {
   static createDoc = async (req, res) => {
     try {
-      const product =  await productModel(req.body);
+      // const product =  await productModel(req.body);
+       var productName = req.body.productName
+       var  price = req.body.price
+
+       var product = new productModel({
+         id: req.params._id,
+         productName:productName,
+         price:price,
+         image : req.file.path
+       })
+
       product.save();
       res.send({ result: product });
     } catch {
